@@ -46,6 +46,11 @@ public class User {
         this.password = password;
     }
 
+    public boolean addRole(Role role)
+    {
+        return roles.add(role);
+    }
+
     public Long getId() {
         return id;
     }
