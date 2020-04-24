@@ -1,0 +1,26 @@
+<div class="container" *ngIf="currentUser; else loginOut">
+  <header class="jumbotron">
+    <h3>
+      <strong>{{ currentUser.username }}</strong> Profile
+    </h3>
+      <button class="btn btn-danger" (click)="deleteUser()" *ngIf="!showAdmin">Usuń konto</button>
+  </header>
+  <p>
+    <strong>Email:</strong>
+    {{ currentUser.email }}
+  </p>
+  <strong>Roles:</strong>
+  <ul>
+    <li *ngFor="let role of currentUser.roles">
+      {{ role }}
+    </li>
+  </ul>
+</div>
+
+<ng-template #loginOut>
+  <div class="container">
+    <header class="jumbotron">
+      <h2><p style="text-align:center">403 Zabronione</p></h2>
+    </header>
+  </div>
+</ng-template>

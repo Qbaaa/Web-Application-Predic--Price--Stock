@@ -46,6 +46,5 @@ public class StockpricepredictApplication implements ApplicationRunner {
 			user.addRole(roleUser);
 			userRepository.save(user);
 		}
-
 	}
 }
