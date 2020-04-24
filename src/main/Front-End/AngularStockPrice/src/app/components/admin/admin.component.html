@@ -1,0 +1,23 @@
+<div class="container" *ngIf="appComponent.showAdmin; else notAdmin">
+  <header class="jumbotron">
+    <h3>
+      <strong>Panel Administratora:</strong>
+    </h3>
+    Wybierz konto użytkownika do usunięcia:
+    <br>
+    <select [(ngModel)]="selectUser" class='form-control'>
+      <option *ngFor="let user of users" [value]="user.email">Użytkownik(id: {{user.id}}, username: {{user.username}}, email: {{user.email}})</option>
+    </select>
+    <br>
+    <button class="btn btn-danger" (click)="deleteUser()">Usuń konto</button>
+  </header>
+</div>
+
+<ng-template #notAdmin>
+  <div class="container">
+    <header class="jumbotron">
+      <h2><p style="text-align:center">403 Zabronione</p></h2>
+    </header>
+  </div>
+</ng-template>
+

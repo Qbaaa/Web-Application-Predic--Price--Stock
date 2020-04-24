@@ -48,7 +48,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
             }
             catch(Exception e)
             {
-                    logger.error("Nie można ustawić autoryzacji użytkownika: " + e);
+                    logger.error("Nie można ustalić autoryzacji użytkownika: " + e);
             }
 
             filterChain.doFilter(request, response);

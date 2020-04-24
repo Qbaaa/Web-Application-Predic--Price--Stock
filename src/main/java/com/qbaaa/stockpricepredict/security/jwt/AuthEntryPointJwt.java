@@ -21,7 +21,7 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
             throws IOException, ServletException {
 
         logger.error("Błąd nieautoryzowany: ", authException.getMessage());
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, " Nazwa uzytkownika lub Hasło są błędne.");
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, " Błąd Uwierzytelniania!!!");
 
     }
 }
