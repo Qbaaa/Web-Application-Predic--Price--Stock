@@ -1,1 +1,14 @@
-<p>user works!</p>
+<div class="container">
+  <header class="jumbotron">
+    <h3>
+      <strong>Przewidywanie ceny akcji spółki giełdowej na 1 dzień:</strong>
+    </h3>
+    Wybierz akcję spółki giełdowej do analizy:
+    <br>
+    <select [(ngModel)]="selectCompany" class='form-control'>
+      <option *ngFor="let company of companies" [value]="company.symbol">Spółka: {{company.company}}, Symbol: {{company.symbol}}</option>
+    </select>
+    <br>
+    <button class="btn btn-danger" (click)="analyze()">Analizuj</button>
+  </header>
+</div>
