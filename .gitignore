@@ -1,0 +1,42 @@
+HELP.md
+target/
+mvnw*
+.mvn/
+!**/src/main/java/**
+!**/src/test/**	
+/src/main/resources/application.properties
+
+## Angular
+
+**/Front-End/AngularStockPrice/node_modules
+**/Front-End/AngularStockPrice/e2e
+**/Front-End/AngularStockPrice/src/environments
+**/Front-End/AngularStockPrice/*.json
+**/Front-End/AngularStockPrice/*.js
+*.spec.ts
+**/Front-End/AngularStockPrice/*.editorconfig
+**/Front-End/AngularStockPrice/src/main.ts
+**/Front-End/AngularStockPrice/src/polyfills.ts
+**/Front-End/AngularStockPrice/src/test.ts
+**/Front-End/AngularStockPrice/browserslist
+**/Front-End/AngularStockPrice/dist
+**/Front-End/AngularStockPrice/tmp
+**/Front-End/AngularStockPrice/out-tsc
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### VS Code ###
+.vscode/
