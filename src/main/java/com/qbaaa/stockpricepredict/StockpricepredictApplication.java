@@ -18,7 +18,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 
 @SpringBootApplication
@@ -68,153 +67,100 @@ public class StockpricepredictApplication implements ApplicationRunner {
 			userRepository.save(user);
 		}
 
-		if (statusUpdateCompanyRepository.existsById(1L)) {
+		if (statusUpdateCompanyRepository.existsById(1L))
+		{
+			LocalDate dateEnd;
 
-			StatusUpdateCompany status = statusUpdateCompanyRepository.findById(1L).orElseThrow(() -> new RuntimeException("Brak statusu o podanym ID!!!"));
+			if(LocalDate.now().minusDays(1).getDayOfWeek().getValue() == 6)
+				dateEnd = LocalDate.now().minusDays(2);
+			else if(LocalDate.now().minusDays(1).getDayOfWeek().getValue() == 7)
+				dateEnd = LocalDate.now().minusDays(3);
+			else
+				dateEnd = LocalDate.now().minusDays(1);
 
-			if (!statusUpdateCompanyRepository.existsByDate(LocalDate.now()))
+			if (!statusUpdateCompanyRepository.existsByDate(dateEnd))
 			{
-				List<Company> listGoogl = apiFinancial.ReadingHistorialPriceStock("GOOGL", status.getDate().plusDays(1), LocalDate.now());
-				companyRepository.saveAll(listGoogl);
-
-				List<Company> listAAPL = apiFinancial.ReadingHistorialPriceStock("AAPL", status.getDate().plusDays(1), LocalDate.now());
-				companyRepository.saveAll(listAAPL);
-
-				List<Company> listMSFT = apiFinancial.ReadingHistorialPriceStock("MSFT", status.getDate().plusDays(1), LocalDate.now());
-				companyRepository.saveAll(listMSFT);
-
-				List<Company> listAMZN = apiFinancial.ReadingHistorialPriceStock("AMZN", status.getDate().plusDays(1), LocalDate.now());
-				companyRepository.saveAll(listAMZN);
-
-				List<Company> listTSLA = apiFinancial.ReadingHistorialPriceStock("TSLA", status.getDate().plusDays(1), LocalDate.now());
-				companyRepository.saveAll(listTSLA);
-
-				List<Company> listINTC = apiFinancial.ReadingHistorialPriceStock("INTC", status.getDate().plusDays(1), LocalDate.now());
-				companyRepository.saveAll(listINTC);
-
-				List<Company> listCSCO = apiFinancial.ReadingHistorialPriceStock("CSCO", status.getDate().plusDays(1), LocalDate.now());
-				companyRepository.saveAll(listCSCO);
-
-				List<Company> listHPQ = apiFinancial.ReadingHistorialPriceStock("HPQ", status.getDate().plusDays(1), LocalDate.now());
-				companyRepository.saveAll(listHPQ);
-
-				List<Company> listORCL = apiFinancial.ReadingHistorialPriceStock("ORCL", status.getDate().plusDays(1), LocalDate.now());
-				companyRepository.saveAll(listORCL);
-
-				List<Company> listAMD = apiFinancial.ReadingHistorialPriceStock("AMD", status.getDate().plusDays(1), LocalDate.now());
-				companyRepository.saveAll(listAMD);
-
-				List<Company> listEBAY = apiFinancial.ReadingHistorialPriceStock("EBAY", status.getDate().plusDays(1), LocalDate.now());
-				companyRepository.saveAll(listEBAY);
-
-				List<Company> listV = apiFinancial.ReadingHistorialPriceStock("V", status.getDate().plusDays(1), LocalDate.now());
-				companyRepository.saveAll(listV);
-
-				List<Company> listNVDA = apiFinancial.ReadingHistorialPriceStock("NVDA", status.getDate().plusDays(1), LocalDate.now());
-				companyRepository.saveAll(listNVDA);
-
 				logger.info("Aktualizacja Tabeli companies.");
-				status.setDate(LocalDate.now());
+
+				StatusUpdateCompany status = statusUpdateCompanyRepository.findById(1L).orElseThrow(() -> new RuntimeException("Brak statusu o podanym ID!!!"));
+				updateCompanies("GOOGL", status.getDate().plusDays(1), dateEnd);
+				updateCompanies("AAPL", status.getDate().plusDays(1), dateEnd);
+				updateCompanies("MSFT", status.getDate().plusDays(1), dateEnd);
+				updateCompanies("AMZN", status.getDate().plusDays(1), dateEnd);
+				updateCompanies("TSLA", status.getDate().plusDays(1), dateEnd);
+				updateCompanies("INTC", status.getDate().plusDays(1), dateEnd);
+				updateCompanies("CSCO", status.getDate().plusDays(1), dateEnd);
+				updateCompanies("HPQ", status.getDate().plusDays(1), dateEnd);
+				updateCompanies("ORCL", status.getDate().plusDays(1), dateEnd);
+				updateCompanies("AMD", status.getDate().plusDays(1), dateEnd);
+				updateCompanies("EBAY", status.getDate().plusDays(1), dateEnd);
+				updateCompanies("V", status.getDate().plusDays(1), dateEnd);
+				updateCompanies("NVDA", status.getDate().plusDays(1), dateEnd);
+
+				status.setDate(dateEnd);
 				statusUpdateCompanyRepository.save(status);
 			}
-			else {
+			else{
 				logger.info("Tabela companies jest już zaktualizowana.");
 			}
-
 
 		}
 		else {
 			logger.info("Tworzenie Tabeli companies.");
-			List<Company> listGoogl = apiFinancial.ReadingHistorialPriceStock("GOOGL", LocalDate.of(2015,1,1), LocalDate.now());
-			companyRepository.saveAll(listGoogl);
+			LocalDate dateEnd;
+			if(LocalDate.now().minusDays(1).getDayOfWeek().getValue() == 6)
+				dateEnd = LocalDate.now().minusDays(2);
+			else if(LocalDate.now().minusDays(1).getDayOfWeek().getValue() == 7)
+				dateEnd = LocalDate.now().minusDays(3);
+			else
+				dateEnd = LocalDate.now().minusDays(1);
 
-			List<Company> listAAPL = apiFinancial.ReadingHistorialPriceStock("AAPL", LocalDate.of(2015,1,1), LocalDate.now());
-			companyRepository.saveAll(listAAPL);
-
-			List<Company> listMSFT = apiFinancial.ReadingHistorialPriceStock("MSFT", LocalDate.of(2015,1,1), LocalDate.now());
-			companyRepository.saveAll(listMSFT);
-
-			List<Company> listAMZN = apiFinancial.ReadingHistorialPriceStock("AMZN", LocalDate.of(2015,1,1), LocalDate.now());
-			companyRepository.saveAll(listAMZN);
-
-			List<Company> listTSLA = apiFinancial.ReadingHistorialPriceStock("TSLA", LocalDate.of(2015,1,1), LocalDate.now());
-			companyRepository.saveAll(listTSLA);
-
-			List<Company> listINTC = apiFinancial.ReadingHistorialPriceStock("INTC", LocalDate.of(2015,1,1), LocalDate.now());
-			companyRepository.saveAll(listINTC);
-
-			List<Company> listCSCO = apiFinancial.ReadingHistorialPriceStock("CSCO", LocalDate.of(2015,1,1), LocalDate.now());
-			companyRepository.saveAll(listCSCO);
-
-			List<Company> listHPQ = apiFinancial.ReadingHistorialPriceStock("HPQ", LocalDate.of(2015,1,1), LocalDate.now());
-			companyRepository.saveAll(listHPQ);
-
-			List<Company> listORCL = apiFinancial.ReadingHistorialPriceStock("ORCL", LocalDate.of(2015,1,1), LocalDate.now());
-			companyRepository.saveAll(listORCL);
-
-			List<Company> listAMD = apiFinancial.ReadingHistorialPriceStock("AMD", LocalDate.of(2015,1,1), LocalDate.now());
-			companyRepository.saveAll(listAMD);
-
-			List<Company> listEBAY = apiFinancial.ReadingHistorialPriceStock("EBAY", LocalDate.of(2015,1,1), LocalDate.now());
-			companyRepository.saveAll(listEBAY);
-
-			List<Company> listV = apiFinancial.ReadingHistorialPriceStock("V", LocalDate.of(2015,1,1), LocalDate.now());
-			companyRepository.saveAll(listV);
-
-			List<Company> listNVDA = apiFinancial.ReadingHistorialPriceStock("NVDA", LocalDate.of(2015,1,1), LocalDate.now());
-			companyRepository.saveAll(listNVDA);
-
-			statusUpdateCompanyRepository.save(new StatusUpdateCompany(LocalDate.now()));
+			updateCompanies("GOOGL", LocalDate.of(2015,1,1), dateEnd);
+			updateCompanies("AAPL", LocalDate.of(2015,1,1), dateEnd);
+			updateCompanies("MSFT", LocalDate.of(2015,1,1), dateEnd);
+			updateCompanies("AMZN", LocalDate.of(2015,1,1), dateEnd);
+			updateCompanies("TSLA", LocalDate.of(2015,1,1), dateEnd);
+			updateCompanies("INTC", LocalDate.of(2015,1,1), dateEnd);
+			updateCompanies("CSCO", LocalDate.of(2015,1,1), dateEnd);
+			updateCompanies("HPQ", LocalDate.of(2015,1,1), dateEnd);
+			updateCompanies("ORCL", LocalDate.of(2015,1,1), dateEnd);
+			updateCompanies("AMD", LocalDate.of(2015,1,1), dateEnd);
+			updateCompanies("EBAY", LocalDate.of(2015,1,1), dateEnd);
+			updateCompanies("V", LocalDate.of(2015,1,1), dateEnd);
+			updateCompanies("NVDA", LocalDate.of(2015,1,1), dateEnd);
+			statusUpdateCompanyRepository.save(new StatusUpdateCompany(dateEnd));
 		}
 	}
 
-	@Scheduled(cron = "0 0 10 * * 2-6")
+	@Scheduled(cron = "0 1 0 * * 2-6")
 	public void scheduleUpdateCompany() {
+		logger.info("Aktualizacja(Automatyczna) tabeli companies do daty:" + LocalDate.now().minusDays(1).toString());
+
 		StatusUpdateCompany status = statusUpdateCompanyRepository.findById(1L).orElseThrow(() -> new RuntimeException("Brak statusu o podanym ID!!!"));
 
-		List<Company> listGoogl = apiFinancial.ReadingHistorialPriceStock("GOOGL", status.getDate(), LocalDate.now());
-		companyRepository.saveAll(listGoogl);
+		updateCompanies("GOOGL", status.getDate().plusDays(1), LocalDate.now().minusDays(1));
+		updateCompanies("AAPL", status.getDate().plusDays(1), LocalDate.now().minusDays(1));
+		updateCompanies("MSFT", status.getDate().plusDays(1), LocalDate.now().minusDays(1));
+		updateCompanies("AMZN", status.getDate().plusDays(1), LocalDate.now().minusDays(1));
+		updateCompanies("TSLA", status.getDate().plusDays(1), LocalDate.now().minusDays(1));
+		updateCompanies("INTC", status.getDate().plusDays(1), LocalDate.now().minusDays(1));
+		updateCompanies("CSCO", status.getDate().plusDays(1), LocalDate.now().minusDays(1));
+		updateCompanies("HPQ", status.getDate().plusDays(1), LocalDate.now().minusDays(1));
+		updateCompanies("ORCL", status.getDate().plusDays(1), LocalDate.now().minusDays(1));
+		updateCompanies("AMD", status.getDate().plusDays(1), LocalDate.now().minusDays(1));
+		updateCompanies("EBAY", status.getDate().plusDays(1), LocalDate.now().minusDays(1));
+		updateCompanies("V", status.getDate().plusDays(1), LocalDate.now().minusDays(1));
+		updateCompanies("NVDA", status.getDate().plusDays(1), LocalDate.now().minusDays(1));
 
-		List<Company> listAAPL = apiFinancial.ReadingHistorialPriceStock("AAPL", status.getDate(), LocalDate.now());
-		companyRepository.saveAll(listAAPL);
-
-		List<Company> listMSFT = apiFinancial.ReadingHistorialPriceStock("MSFT", status.getDate(), LocalDate.now());
-		companyRepository.saveAll(listMSFT);
-
-		List<Company> listAMZN = apiFinancial.ReadingHistorialPriceStock("AMZN", status.getDate(), LocalDate.now());
-		companyRepository.saveAll(listAMZN);
-
-		List<Company> listTSLA = apiFinancial.ReadingHistorialPriceStock("TSLA", status.getDate(), LocalDate.now());
-		companyRepository.saveAll(listTSLA);
-
-		List<Company> listINTC = apiFinancial.ReadingHistorialPriceStock("INTC", status.getDate(), LocalDate.now());
-		companyRepository.saveAll(listINTC);
-
-		List<Company> listCSCO = apiFinancial.ReadingHistorialPriceStock("CSCO", status.getDate(), LocalDate.now());
-		companyRepository.saveAll(listCSCO);
-
-		List<Company> listHPQ = apiFinancial.ReadingHistorialPriceStock("HPQ", status.getDate(), LocalDate.now());
-		companyRepository.saveAll(listHPQ);
-
-		List<Company> listORCL = apiFinancial.ReadingHistorialPriceStock("ORCL", status.getDate(), LocalDate.now());
-		companyRepository.saveAll(listORCL);
-
-		List<Company> listAMD = apiFinancial.ReadingHistorialPriceStock("AMD", status.getDate(), LocalDate.now());
-		companyRepository.saveAll(listAMD);
-
-		List<Company> listEBAY = apiFinancial.ReadingHistorialPriceStock("EBAY", status.getDate(), LocalDate.now());
-		companyRepository.saveAll(listEBAY);
-
-		List<Company> listV = apiFinancial.ReadingHistorialPriceStock("V", status.getDate(), LocalDate.now());
-		companyRepository.saveAll(listV);
-
-		List<Company> listNVDA = apiFinancial.ReadingHistorialPriceStock("NVDA", status.getDate(), LocalDate.now());
-		companyRepository.saveAll(listNVDA);
-
-		status.setDate(LocalDate.now());
+		status.setDate(LocalDate.now().minusDays(1));
 		statusUpdateCompanyRepository.save(status);
+	}
 
-		logger.info("Aktualizacja(Automatyczna) tabeli companies :" + LocalTime.now().toString());
+
+	public void updateCompanies(String symbolStock, LocalDate dateStrat, LocalDate dateEnd)
+	{
+		List<Company> listCompany = apiFinancial.ReadingHistorialPriceStock(symbolStock, dateStrat, dateEnd);
+		companyRepository.saveAll(listCompany);
 	}
 
 }

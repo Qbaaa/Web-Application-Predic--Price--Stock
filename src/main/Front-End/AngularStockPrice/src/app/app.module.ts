@@ -14,6 +14,7 @@ import { UserComponent } from './components/user/user.component';
 
 import {authInterceptorProviders} from "./interceptor/auth.interceptor";
 
+import { HighchartsChartComponent } from 'highcharts-angular';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {authInterceptorProviders} from "./interceptor/auth.interceptor";
     LoginComponent,
     ProfilComponent,
     AdminComponent,
-    UserComponent
+    UserComponent,
+    HighchartsChartComponent
   ],
   imports: [
     BrowserModule,

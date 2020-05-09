@@ -16,4 +16,8 @@ export class UserService {
     return this.http.delete(URL + '/' + email, httpOptions);
   }
 
+  predictPriceStock(symbolStock):Observable<any>{
+    return this.http.post(URL + '/' + symbolStock, httpOptions);
+  }
+
 }

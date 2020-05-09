@@ -1,14 +1,33 @@
-<div class="container">
+<div class="container" *ngIf="appComponent.isLoggedIn; else notLoggedIn">
   <header class="jumbotron">
     <h3>
       <strong>Przewidywanie ceny akcji spółki giełdowej na 1 dzień:</strong>
     </h3>
     Wybierz akcję spółki giełdowej do analizy:
     <br>
-    <select [(ngModel)]="selectCompany" class='form-control'>
+    <select [(ngModel)]="selectCompany" class='form-control' [disabled]="loading">
       <option *ngFor="let company of companies" [value]="company.symbol">Spółka: {{company.company}}, Symbol: {{company.symbol}}</option>
     </select>
     <br>
-    <button class="btn btn-danger" (click)="analyze()">Analizuj</button>
+    <button class="btn btn-danger" [disabled]="loading" (click)="analyze()">Analizuj
+      <span class="spinner-border spinner-border-sm" *ngIf="loading"></span>
+      </button>
+
+    <highcharts-chart
+      [Highcharts] = "highcharts"
+      [options] = "chartOptions"
+      [(update)]="updateFlag"
+      style = "width: 100%; height: 500px; display: block; padding-top:10px;">
+    </highcharts-chart>
+
+    <h5 *ngIf="pressedAnalyze" style = "padding-top:10px;">Przewidywana cena akcji {{selectCompany}} dla daty <u>{{dateNextDay}}</u>  to: {{priceNextDay}} USD</h5>
   </header>
 </div>
+
+<ng-template #notLoggedIn>
+  <div class="container">
+    <header class="jumbotron">
+      <h2><p style="text-align:center">403 Zabronione</p></h2>
+    </header>
+  </div>
+</ng-template>
