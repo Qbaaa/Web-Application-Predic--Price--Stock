@@ -4,7 +4,6 @@ mvnw*
 .mvn/
 !**/src/main/java/**
 !**/src/test/**	
-/src/main/resources/application.properties
 
 ## Angular
 

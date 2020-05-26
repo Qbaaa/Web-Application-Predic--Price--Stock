@@ -11,10 +11,6 @@ import * as Highcharts from 'highcharts';
 export class UserComponent implements OnInit {
   companies = [
     {
-      company: 'Google',
-      symbol: 'GOOGL'
-    },
-    {
       company: 'Apple',
       symbol: 'AAPL'
     },
@@ -33,10 +29,6 @@ export class UserComponent implements OnInit {
     {
       company: 'Intel',
       symbol: 'INTC'
-    },
-    {
-      company: 'Cisco',
-      symbol: 'CSCO'
     },
     {
       company: 'HP Inc.',

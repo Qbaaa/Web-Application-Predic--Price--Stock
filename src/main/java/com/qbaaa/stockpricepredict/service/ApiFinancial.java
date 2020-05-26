@@ -5,6 +5,7 @@ import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -14,6 +15,8 @@ import java.util.List;
 @Service
 public class ApiFinancial {
 
+    @Value("${ApiFinancial.apikey}")
+    private String apiKey;
 
     public List<Company> ReadingHistorialPriceStock(String symbolStock, LocalDate dateStart, LocalDate dateEnd)
     {
@@ -21,7 +24,7 @@ public class ApiFinancial {
         List<Company> records = new ArrayList<>();
 
         HttpResponse historialDataPriceStock = Unirest.get("https://financialmodelingprep.com/api/v3/historical-price-full/"
-                + symbolStock + "?from=" + dateStart + "&to=" + dateEnd).asJson();
+                + symbolStock + "?from=" + dateStart + "&to=" + dateEnd + "&apikey=" + apiKey).asJson();
 
         JSONObject jsonData = new JSONObject(historialDataPriceStock.getBody().toString());
 

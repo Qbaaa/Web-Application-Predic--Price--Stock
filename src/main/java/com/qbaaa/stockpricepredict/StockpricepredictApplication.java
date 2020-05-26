@@ -65,6 +65,22 @@ public class StockpricepredictApplication implements ApplicationRunner {
 			User user = new User("user","user@o2.pl",passwordEncoder.encode("user123"));
 			user.addRole(roleUser);
 			userRepository.save(user);
+
+			User user1 = new User("user1","user1@o2.pl",passwordEncoder.encode("user234"));
+			user1.addRole(roleUser);
+			userRepository.save(user1);
+
+			User user2 = new User("user2","user2@o2.pl",passwordEncoder.encode("user345"));
+			user2.addRole(roleUser);
+			userRepository.save(user2);
+
+			User user3 = new User("user3","user3@o2.pl",passwordEncoder.encode("user456"));
+			user3.addRole(roleUser);
+			userRepository.save(user3);
+
+			User user4 = new User("Jakub","jakub@gmail.pl",passwordEncoder.encode("xaume12"));
+			user4.addRole(roleUser);
+			userRepository.save(user4);
 		}
 
 		if (statusUpdateCompanyRepository.existsById(1L))
@@ -83,13 +99,11 @@ public class StockpricepredictApplication implements ApplicationRunner {
 				logger.info("Aktualizacja Tabeli companies.");
 
 				StatusUpdateCompany status = statusUpdateCompanyRepository.findById(1L).orElseThrow(() -> new RuntimeException("Brak statusu o podanym ID!!!"));
-				updateCompanies("GOOGL", status.getDate().plusDays(1), dateEnd);
 				updateCompanies("AAPL", status.getDate().plusDays(1), dateEnd);
 				updateCompanies("MSFT", status.getDate().plusDays(1), dateEnd);
 				updateCompanies("AMZN", status.getDate().plusDays(1), dateEnd);
 				updateCompanies("TSLA", status.getDate().plusDays(1), dateEnd);
 				updateCompanies("INTC", status.getDate().plusDays(1), dateEnd);
-				updateCompanies("CSCO", status.getDate().plusDays(1), dateEnd);
 				updateCompanies("HPQ", status.getDate().plusDays(1), dateEnd);
 				updateCompanies("ORCL", status.getDate().plusDays(1), dateEnd);
 				updateCompanies("AMD", status.getDate().plusDays(1), dateEnd);
@@ -115,13 +129,11 @@ public class StockpricepredictApplication implements ApplicationRunner {
 			else
 				dateEnd = LocalDate.now().minusDays(1);
 
-			updateCompanies("GOOGL", LocalDate.of(2015,1,1), dateEnd);
 			updateCompanies("AAPL", LocalDate.of(2015,1,1), dateEnd);
 			updateCompanies("MSFT", LocalDate.of(2015,1,1), dateEnd);
 			updateCompanies("AMZN", LocalDate.of(2015,1,1), dateEnd);
 			updateCompanies("TSLA", LocalDate.of(2015,1,1), dateEnd);
 			updateCompanies("INTC", LocalDate.of(2015,1,1), dateEnd);
-			updateCompanies("CSCO", LocalDate.of(2015,1,1), dateEnd);
 			updateCompanies("HPQ", LocalDate.of(2015,1,1), dateEnd);
 			updateCompanies("ORCL", LocalDate.of(2015,1,1), dateEnd);
 			updateCompanies("AMD", LocalDate.of(2015,1,1), dateEnd);
@@ -138,13 +150,11 @@ public class StockpricepredictApplication implements ApplicationRunner {
 
 		StatusUpdateCompany status = statusUpdateCompanyRepository.findById(1L).orElseThrow(() -> new RuntimeException("Brak statusu o podanym ID!!!"));
 
-		updateCompanies("GOOGL", status.getDate().plusDays(1), LocalDate.now().minusDays(1));
 		updateCompanies("AAPL", status.getDate().plusDays(1), LocalDate.now().minusDays(1));
 		updateCompanies("MSFT", status.getDate().plusDays(1), LocalDate.now().minusDays(1));
 		updateCompanies("AMZN", status.getDate().plusDays(1), LocalDate.now().minusDays(1));
 		updateCompanies("TSLA", status.getDate().plusDays(1), LocalDate.now().minusDays(1));
 		updateCompanies("INTC", status.getDate().plusDays(1), LocalDate.now().minusDays(1));
-		updateCompanies("CSCO", status.getDate().plusDays(1), LocalDate.now().minusDays(1));
 		updateCompanies("HPQ", status.getDate().plusDays(1), LocalDate.now().minusDays(1));
 		updateCompanies("ORCL", status.getDate().plusDays(1), LocalDate.now().minusDays(1));
 		updateCompanies("AMD", status.getDate().plusDays(1), LocalDate.now().minusDays(1));
