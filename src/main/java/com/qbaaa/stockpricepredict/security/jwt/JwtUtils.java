@@ -1,6 +1,6 @@
 package com.qbaaa.stockpricepredict.security.jwt;
 
-import com.qbaaa.stockpricepredict.security.services.UserDetailsImpl;
+import com.qbaaa.stockpricepredict.security.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

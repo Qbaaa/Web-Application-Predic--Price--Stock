@@ -2,7 +2,7 @@ package com.qbaaa.stockpricepredict.security.config;
 
 import com.qbaaa.stockpricepredict.security.jwt.AuthEntryPointJwt;
 import com.qbaaa.stockpricepredict.security.jwt.AuthTokenFilter;
-import com.qbaaa.stockpricepredict.security.services.UserDetailsServiceImpl;
+import com.qbaaa.stockpricepredict.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +23,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    UserDetailsServiceImpl userDetailsService;
+    UserService userDetailsService;
 
     @Autowired
     private AuthEntryPointJwt unauthorizedHandler;

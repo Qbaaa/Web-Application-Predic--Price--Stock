@@ -4,11 +4,11 @@ import { UserService } from "../../services/user.service";
 import * as Highcharts from 'highcharts';
 
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+  selector: 'app-historial-predict',
+  templateUrl: './historial-predict.component.html',
+  styleUrls: ['./historial-predict.component.css']
 })
-export class UserComponent implements OnInit {
+export class HistorialPredictComponent implements OnInit {
   window_size = [5,6,7,8,9,10];
 
   companies = [
@@ -61,10 +61,6 @@ export class UserComponent implements OnInit {
   pressedAnalyze = false;
   selectCompany = this.companies[0].symbol;
   selectWindowSize = this.window_size[0];
-
-  dateNextDay;
-  priceNextDay;
-
   highcharts = Highcharts;
   updateFlag = false;
   chartOptions = {
@@ -76,7 +72,7 @@ export class UserComponent implements OnInit {
       text: "Stock Price"
     },
     subtitle: {
-       text: ""
+      text: ""
     },
     xAxis:{
       title:{
@@ -122,7 +118,7 @@ export class UserComponent implements OnInit {
   analyze(){
     this.loading = true;
 
-    this.userService.predictPriceStock(this.selectCompany, this.selectWindowSize).subscribe(
+    this.userService.historialPriceStock(this.selectCompany, this.selectWindowSize).subscribe(
       data => {
         this.pressedAnalyze = true;
 
@@ -134,7 +130,7 @@ export class UserComponent implements OnInit {
           title:{
             text: "Data"
           },
-          categories: data.datesTrain
+          categories: data.datesTest
         };
 
         this.chartOptions.series = [
@@ -144,7 +140,7 @@ export class UserComponent implements OnInit {
               symbol: 'circle'
             },
             color: '#FF0000',
-            data: data.pricePredicTrain
+            data: data.pricePredicTest
           },
           {
             name: 'Rzeczywiste',
@@ -152,20 +148,16 @@ export class UserComponent implements OnInit {
               symbol: 'circle'
             },
             color: '#0000FF',
-            data: data.pricesActualTrain
+            data: data.pricesActualTest
           }
         ];
 
         this.updateFlag = true;
-        this.dateNextDay = data.dateNextDay;
-        this.priceNextDay = data.priceNextDay;
-
         this.loading = false;
       },
       err => {
         console.log(err.error.message);
         this.pressedAnalyze = false;
-
         this.loading = false;
       }
     );

@@ -3,8 +3,9 @@ package com.qbaaa.stockpricepredict.controllers;
 import com.qbaaa.stockpricepredict.models.User;
 import com.qbaaa.stockpricepredict.repository.UserRepository;
 import com.qbaaa.stockpricepredict.response.CompanyResponse;
+import com.qbaaa.stockpricepredict.response.HistorialPredictResponse;
 import com.qbaaa.stockpricepredict.response.MessageResponse;
-import com.qbaaa.stockpricepredict.service.PredictPriceStock;
+import com.qbaaa.stockpricepredict.service.PredictPriceStockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class UserController {
     private UserRepository userRepository;
 
     @Autowired
-    private PredictPriceStock predictPriceStock;
+    private PredictPriceStockService predictPriceStockService;
 
     @DeleteMapping("/user/{email}")
     public ResponseEntity<?> deleteUser(@PathVariable String email) {
@@ -28,13 +29,20 @@ public class UserController {
         return new ResponseEntity<>(new MessageResponse(("Konto użytkownika: " + deleteUser.getUsername() + " zostało usunięte!")), HttpStatus.OK);
     }
 
-    @PostMapping("/user/{symbolStock}")
-    public ResponseEntity<?> predictPriceStock(@PathVariable String symbolStock){
+    @PostMapping("/user/{symbolStock}/{windowSize}")
+    public ResponseEntity<?> predictPriceStock(@PathVariable String symbolStock, @PathVariable String windowSize){
 
-        CompanyResponse result = predictPriceStock.predictPriceStockOneDays(symbolStock);
+        CompanyResponse result = predictPriceStockService.predictPriceStockOneDays(symbolStock, windowSize);
 
         return new ResponseEntity<>(result,HttpStatus.OK);
 
+    }
+
+    @PostMapping("/user/historial/{symbolStock}/{windowSize}")
+    public ResponseEntity<?> historialPredictPriceStock(@PathVariable String symbolStock, @PathVariable String windowSize){
+
+        HistorialPredictResponse result = predictPriceStockService.historialPredictPriceStock(symbolStock, windowSize);
+        return new ResponseEntity<>(result,HttpStatus.OK);
     }
 
 }

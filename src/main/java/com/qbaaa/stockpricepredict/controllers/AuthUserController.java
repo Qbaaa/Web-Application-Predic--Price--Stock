@@ -10,7 +10,7 @@ import com.qbaaa.stockpricepredict.request.RegisterRequest;
 import com.qbaaa.stockpricepredict.response.JwtResponse;
 import com.qbaaa.stockpricepredict.response.MessageResponse;
 import com.qbaaa.stockpricepredict.security.jwt.JwtUtils;
-import com.qbaaa.stockpricepredict.security.services.UserDetailsImpl;
+import com.qbaaa.stockpricepredict.security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

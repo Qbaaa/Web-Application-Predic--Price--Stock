@@ -1,7 +1,8 @@
-package com.qbaaa.stockpricepredict.security.services;
+package com.qbaaa.stockpricepredict.service;
 
 import com.qbaaa.stockpricepredict.models.User;
 import com.qbaaa.stockpricepredict.repository.UserRepository;
+import com.qbaaa.stockpricepredict.security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class UserService implements UserDetailsService {
     @Autowired
     UserRepository userRepository;
 

@@ -1,12 +1,11 @@
 package com.qbaaa.stockpricepredict.models;
 
-
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "companies")
-public class Company {
+@Table(name = "historical_price_companies")
+public class HistoricalPriceCompanies {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,10 +17,10 @@ public class Company {
 
     private Double priceClose;
 
-    public Company() {
+    public HistoricalPriceCompanies() {
     }
 
-    public Company(String symbol, LocalDate date, Double priceClose) {
+    public HistoricalPriceCompanies(String symbol, LocalDate date, Double priceClose) {
         this.symbol = symbol;
         this.date = date;
         this.priceClose = priceClose;
@@ -61,7 +60,7 @@ public class Company {
 
     @Override
     public String toString() {
-        return "Company{" +
+        return "HistoricalPriceCompanies{" +
                 "id=" + id +
                 ", symbol='" + symbol + '\'' +
                 ", date=" + date +

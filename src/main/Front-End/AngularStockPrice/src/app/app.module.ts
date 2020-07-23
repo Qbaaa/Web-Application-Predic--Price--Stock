@@ -15,6 +15,7 @@ import { UserComponent } from './components/user/user.component';
 import {authInterceptorProviders} from "./interceptor/auth.interceptor";
 
 import { HighchartsChartComponent } from 'highcharts-angular';
+import { HistorialPredictComponent } from './components/historial-predict/historial-predict.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { HighchartsChartComponent } from 'highcharts-angular';
     ProfilComponent,
     AdminComponent,
     UserComponent,
-    HighchartsChartComponent
+    HighchartsChartComponent,
+    HistorialPredictComponent
   ],
   imports: [
     BrowserModule,

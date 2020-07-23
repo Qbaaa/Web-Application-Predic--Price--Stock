@@ -1,6 +1,6 @@
 package com.qbaaa.stockpricepredict.service;
 
-import com.qbaaa.stockpricepredict.models.Company;
+import com.qbaaa.stockpricepredict.models.HistoricalPriceCompanies;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 import org.json.JSONArray;
@@ -13,15 +13,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ApiFinancial {
+public class ApiFinancialService {
 
     @Value("${ApiFinancial.apikey}")
     private String apiKey;
 
-    public List<Company> ReadingHistorialPriceStock(String symbolStock, LocalDate dateStart, LocalDate dateEnd)
+    public List<HistoricalPriceCompanies> ReadingHistorialPriceStock(String symbolStock, LocalDate dateStart, LocalDate dateEnd)
     {
 
-        List<Company> records = new ArrayList<>();
+        List<HistoricalPriceCompanies> records = new ArrayList<>();
 
         HttpResponse historialDataPriceStock = Unirest.get("https://financialmodelingprep.com/api/v3/historical-price-full/"
                 + symbolStock + "?from=" + dateStart + "&to=" + dateEnd + "&apikey=" + apiKey).asJson();
@@ -37,9 +37,9 @@ public class ApiFinancial {
             String date = dateStock.getString("date");
             LocalDate localDate = LocalDate.parse(date);
 
-            Double priceClose = dateStock.getDouble("close");
+            Double priceClose = dateStock.getDouble("adjClose");
 
-            Company tempStock = new Company(symbolStock,localDate, priceClose);
+            HistoricalPriceCompanies tempStock = new HistoricalPriceCompanies(symbolStock,localDate, priceClose);
             records.add(tempStock);
 
         }

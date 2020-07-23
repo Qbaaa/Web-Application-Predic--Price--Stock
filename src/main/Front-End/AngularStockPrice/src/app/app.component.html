@@ -5,7 +5,11 @@
 
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
       <li class="nav-item">
-        <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">User</a>
+        <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">Przewidywanie</a>
+      </li>
+
+      <li class="nav-item">
+        <a href="/historial" class="nav-link" *ngIf="isLoggedIn" routerLink="historial">Historia przewidywań</a>
       </li>
 
       <li class="nav-item" *ngIf="showAdmin">

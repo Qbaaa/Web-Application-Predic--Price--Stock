@@ -1,4 +1,4 @@
-package com.qbaaa.stockpricepredict.security.services;
+package com.qbaaa.stockpricepredict.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.qbaaa.stockpricepredict.models.User;
