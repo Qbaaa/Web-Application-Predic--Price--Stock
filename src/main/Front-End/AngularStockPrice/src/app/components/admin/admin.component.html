@@ -10,6 +10,80 @@
     </select>
     <br>
     <button class="btn btn-danger" (click)="deleteUser()">Usuń konto</button>
+
+
+    <hr style="height: 1px; background: black; border: 2px;">
+    <h3>
+      Konfiguracja splotowej sieci neuronowej:
+    </h3>
+
+    <div class="form-group">
+      Struktura sieci:
+      <select [(ngModel)]="selectStructure" class='form-control' >
+        <option *ngFor="let value of structures" [value]="value">Struktura: {{value}}</option>
+      </select>
+    </div>
+
+    <div class="form-group" style="float: left; width:33.3%">
+      Liczba filtrów w 1-szej warstwie kowolucyjnej:
+      <select [(ngModel)]="selectConv1" class='form-control' >
+        <option *ngFor="let layer of conv1" [value]="layer">Filtry: {{layer}}</option>
+      </select>
+    </div>
+    <div class="form-group" style="float: left; width:33.3%" >
+      Liczba filtrów w 2-giej warstwie kowolucyjnej:
+      <select [(ngModel)]="selectConv2" class='form-control' [disabled]="selectStructure == this.structures[0] " >
+        <option *ngFor="let layer of conv2" [value]="layer">Filtry: {{layer}}</option>
+      </select>
+    </div>
+    <div class="form-group" style="float: left; width:33.4%">
+      Liczba jednostek w 1-szej warstwie gęstej :
+      <select [(ngModel)]="selectDense1" class='form-control' >
+        <option *ngFor="let layer of dense1" [value]="layer">Jednostki: {{layer}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      Funkcje wagowe:
+      <select [(ngModel)]="selectInitMode" class='form-control' >
+        <option *ngFor="let value of init_mode" [value]="value">Funkcja wagowa: {{value}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      Funkcje aktywacji:
+      <select [(ngModel)]="selectActivation" class='form-control' >
+        <option *ngFor="let activation of activations" [value]="activation">Funkcja aktywacji: {{activation}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      Funkcja optymalizująca:
+      <select [(ngModel)]="selectOptimizer" class='form-control' >
+        <option *ngFor="let optimizer of optimizers" [value]="optimizer">Funkcja optymalizująca: {{optimizer}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      Wielkość parti:
+      <select [(ngModel)]="selectBatchSize" class='form-control' >
+        <option *ngFor="let batch of batch_size" [value]="batch">Wielkość parti: {{batch}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      Liczba epok:
+      <select [(ngModel)]="selectEpoche" class='form-control' >
+        <option *ngFor="let epoche of epoches" [value]="epoche">Liczba epok: {{epoche}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <button class="btn btn-danger" [disabled]="loading" (click)="optimization()">Testuj
+        <span class="spinner-border spinner-border-sm" *ngIf="loading"></span>
+      </button>
+    </div>
+
   </header>
 </div>
 

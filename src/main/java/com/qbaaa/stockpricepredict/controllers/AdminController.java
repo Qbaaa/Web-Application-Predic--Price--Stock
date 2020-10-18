@@ -7,6 +7,7 @@ import com.qbaaa.stockpricepredict.repository.RoleRepository;
 import com.qbaaa.stockpricepredict.repository.UserRepository;
 import com.qbaaa.stockpricepredict.response.MessageResponse;
 import com.qbaaa.stockpricepredict.response.UserResponse;
+import com.qbaaa.stockpricepredict.service.PredictPriceStockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,9 @@ public class AdminController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PredictPriceStockService predictPriceStockService;
 
     @GetMapping("/admin")
     public ResponseEntity<?> getUsers() {
@@ -48,4 +52,15 @@ public class AdminController {
         userRepository.delete(deleteUser);
         return new ResponseEntity<>(new MessageResponse(("Konto użytkownika: " + deleteUser.getUsername() + " zostało usunięte!")), HttpStatus.OK);
     }
+
+    @PostMapping("/admin/{structure}/{conv1}/{conv2}/{dense1}/{initMode}/{activation}/{optimizer}/{batchSize}/{epoche}")
+    public ResponseEntity<?> optimizationNN(@PathVariable String structure, @PathVariable String conv1,
+                                            @PathVariable String conv2, @PathVariable String dense1, @PathVariable String initMode,
+                                            @PathVariable String activation, @PathVariable String optimizer,
+                                            @PathVariable String batchSize, @PathVariable String epoche)
+    {
+        String result = predictPriceStockService.optimizationNN(structure, conv1, conv2, dense1, initMode, activation, optimizer, batchSize, epoche);
+        return new ResponseEntity<>(new MessageResponse(result),HttpStatus.OK);
+    }
+
 }

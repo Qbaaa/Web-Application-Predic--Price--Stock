@@ -22,4 +22,11 @@ export class AdminService {
     return this.http.delete(URL + '/' + email, httpOptions);
   }
 
+  optimization(selectStructure, selectConv1, selectConv2, selectDense1, selectInitMode, selectActivation, selectOptimizer, selectBatchSize, selectEpoche)
+    : Observable<any>{
+    return this.http.post(URL + '/' + selectStructure + '/' + selectConv1 + '/' + selectConv2 + '/' + selectDense1 +
+      '/' + selectInitMode + '/' + selectActivation + '/' + selectOptimizer + '/' + selectBatchSize + '/' + selectEpoche,
+      httpOptions);
+  }
+
 }

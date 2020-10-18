@@ -1,12 +1,12 @@
 HELP.md
 target/
 mvnw*
+out/
 .mvn/
-!**/src/main/java/**
-!**/src/test/**	
+*.csv
+/src/main/resources/META-INF
 
 ## Angular
-
 **/Front-End/AngularStockPrice/node_modules
 **/Front-End/AngularStockPrice/e2e
 **/Front-End/AngularStockPrice/src/environments

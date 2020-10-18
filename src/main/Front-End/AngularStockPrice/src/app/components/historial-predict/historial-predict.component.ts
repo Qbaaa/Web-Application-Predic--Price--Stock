@@ -9,7 +9,7 @@ import * as Highcharts from 'highcharts';
   styleUrls: ['./historial-predict.component.css']
 })
 export class HistorialPredictComponent implements OnInit {
-  window_size = [5,6,7,8,9,10];
+  window_size = [5,8,10];
 
   companies = [
     {
